@@ -1,0 +1,277 @@
+---
+pagetitle: "通用课件模板 · 全部版式"
+---
+
+## {{< meta course.name >}} {#course-opening .course-cover .preview-cover}
+
+::: {.cover-school}
+![](assets/school-mark.svg){.cover-school-image fig-alt="学校标识"}
+:::
+
+::: {.cover-subtitle}
+{{< meta course.subtitle >}}
+:::
+
+::: {.cover-teacher}
+授课人：{{< meta course.teacher >}}
+:::
+
+## 内容目录 {#contents-1 .body-header-preview .contents-page data-chapter-title="文字排版"}
+
+```{=html}
+<nav class="course-toc" aria-label="内容目录">
+<a class="toc-entry is-chapter-current" href="#/single-column-text" aria-current="step"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry" href="#/comparison-summary"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry" href="#/single-image-preview"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+</nav>
+```
+
+## 单栏文字 {#single-column-text .body-header-preview .single-column-page data-chapter-title="文字排版"}
+
+::: {.single-column-content}
+<h3>在这里填写本页的小标题</h3>
+
+这里放置一段简短的说明文字，用于引出本页主题。段落与列表共用一个内容栏，按从上到下的顺序阅读。
+
+- **第一项要点**：用一句话表达一个完整意思。
+- **第二项要点**：保持相同层级的排列方式。
+  - 补充说明放在下一级，使用缩进区分。
+- **第三项要点**：关键词加粗，便于快速定位。
+:::
+
+## 双栏文字 {#two-column-text .body-header-preview .two-column-page data-chapter-title="文字排版"}
+
+:::: {.two-column-content}
+::: {.text-column}
+<h3>左栏小标题</h3>
+
+这里放置第一组内容。用简短的段落说明这一栏的主题。
+
+- **要点一**：表达主要信息。
+- **要点二**：补充必要说明。
+- **要点三**：保持层次清楚。
+:::
+
+::: {.text-column}
+<h3>右栏小标题</h3>
+
+这里放置第二组内容。可以与左栏并列，也可以相互对照。
+
+- **要点一**：围绕另一主题。
+- **要点二**：采用相同结构。
+- **要点三**：突出两者差异。
+:::
+::::
+
+## 内容目录 {#contents-2 .body-header-preview .contents-page data-chapter-title="内容比较"}
+
+```{=html}
+<nav class="course-toc" aria-label="内容目录">
+<a class="toc-entry" href="#/single-column-text"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry is-chapter-current" href="#/comparison-summary" aria-current="step"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry" href="#/single-image-preview"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+</nav>
+```
+
+## 双栏对比与总结 {#comparison-summary .body-header-preview .two-column-page .comparison-summary-page data-chapter-title="内容比较"}
+
+::::: {.comparison-summary-layout}
+:::: {.two-column-content}
+::: {.text-column}
+<h3>对比对象 A</h3>
+
+- **呈现方式**：逐项展开说明。
+- **内容特点**：强调细节与过程。
+- **适用情形**：需要充分理解。
+:::
+
+::: {.text-column}
+<h3>对比对象 B</h3>
+
+- **呈现方式**：集中概括要点。
+- **内容特点**：强调重点与结论。
+- **适用情形**：需要快速浏览。
+:::
+::::
+
+::: {.comparison-summary-box}
+<h3>对比总结</h3>
+
+两种方式各有侧重：A 便于理解细节，B 便于把握重点。根据阅读目标选择，也可以结合使用。
+:::
+:::::
+
+## 四块内容对比 {#four-block-comparison .body-header-preview .four-block-page data-chapter-title="内容比较"}
+
+:::: {.four-block-layout}
+::: {.comparison-block}
+<h3>内容 A</h3>
+
+**特点**：突出主要信息。
+
+**用途**：说明基本情况。
+
+**提示**：保留必要背景。
+:::
+
+::: {.comparison-block}
+<h3>内容 B</h3>
+
+**特点**：突出不同之处。
+
+**用途**：比较另一选择。
+
+**提示**：采用相同维度。
+:::
+
+::: {.comparison-block}
+<h3>内容 C</h3>
+
+**特点**：补充新的角度。
+
+**用途**：展示其他可能。
+
+**提示**：说明适用条件。
+:::
+
+::: {.comparison-block}
+<h3>内容 D</h3>
+
+**特点**：提供不同侧重。
+
+**用途**：形成完整对照。
+
+**提示**：保持表述简洁。
+:::
+::::
+
+## 三块内容对比 {#three-block-comparison .body-header-preview .three-block-page data-chapter-title="内容比较"}
+
+:::: {.three-block-layout}
+::: {.comparison-block}
+<h3>内容 A</h3>
+
+**特点**<br>突出主要信息。
+
+**用途**<br>说明基本情况。
+
+**提示**<br>保留必要背景。
+:::
+
+::: {.comparison-block}
+<h3>内容 B</h3>
+
+**特点**<br>突出不同之处。
+
+**用途**<br>比较另一选择。
+
+**提示**<br>采用相同维度。
+:::
+
+::: {.comparison-block}
+<h3>内容 C</h3>
+
+**特点**<br>补充新的角度。
+
+**用途**<br>展示其他可能。
+
+**提示**<br>说明适用条件。
+:::
+::::
+
+## 卡片网格 {#card-grid-layout .body-header-preview .card-grid-page data-chapter-title="内容比较"}
+
+:::: {.card-grid-layout}
+::: {.content-card}
+<div class="content-card-heading"><span class="content-card-number">01</span><h3>概念说明</h3></div>
+
+用简短文字解释一个概念，保留最重要的信息。
+:::
+
+::: {.content-card}
+<div class="content-card-heading"><span class="content-card-number">02</span><h3>功能介绍</h3></div>
+
+说明一个功能的作用，让读者快速了解用途。
+:::
+
+::: {.content-card}
+<div class="content-card-heading"><span class="content-card-number">03</span><h3>内容分类</h3></div>
+
+将同类信息放在一起，让不同主题清楚分开。
+:::
+
+::: {.content-card}
+<div class="content-card-heading"><span class="content-card-number">04</span><h3>要点归纳</h3></div>
+
+每张卡片聚焦一个要点，四张共同组成整体。
+:::
+::::
+
+## 内容目录 {#contents-3 .body-header-preview .contents-page data-chapter-title="媒体展示"}
+
+```{=html}
+<nav class="course-toc" aria-label="内容目录">
+<a class="toc-entry" href="#/single-column-text"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry" href="#/comparison-summary"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry is-chapter-current" href="#/single-image-preview" aria-current="step"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+</nav>
+```
+
+## 单张图片 {#single-image-preview .body-header-preview .single-image-page data-chapter-title="媒体展示"}
+
+::: {.single-image-stage}
+<img src="assets/layout-image-placeholder.svg" alt="可替换的几何图案占位图">
+:::
+
+## 图文混排 {#image-text-layout .body-header-preview .image-text-page data-chapter-title="媒体展示"}
+
+:::: {.image-text-layout}
+::: {.image-text-visual}
+<img class="layout-illustration" src="assets/layout-image-placeholder.svg" alt="用于演示图片位置的几何山形占位图。">
+
+::: {.image-text-caption}
+图片说明或来源
+:::
+:::
+
+::: {.image-text-copy}
+<h3>用文字解释图片</h3>
+
+左侧展示图片，右侧说明重点。图片与文字相互对应。
+
+- **看什么**：指出主要对象。
+- **怎么看**：说明关键细节。
+- **记什么**：提炼核心信息。
+:::
+::::
+
+## 网络视频 {#network-video-preview .body-header-preview .single-video-page data-chapter-title="媒体展示"}
+
+```{=html}
+<div class="single-video-stage">
+  <div class="video-player">
+    <iframe class="video-embed-frame" data-external="1"
+            data-src="https://player.bilibili.com/player.html?bvid=BV1Ff4y1s78U&amp;p=1&amp;autoplay=0&amp;danmaku=0&amp;poster=1"
+            title="可视化打假：图表如何欺骗我们？陷阱3：片面的数据 — 哔哩哔哩"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen></iframe>
+  </div>
+</div>
+```
+
+## 本地视频 {#local-video-preview .body-header-preview .single-video-page .local-video-page data-chapter-title="媒体展示"}
+
+```{=html}
+<div class="single-video-stage">
+  <div class="video-player">
+    <video class="local-video-player" controls playsinline preload="none"
+           src="assets/local-video-demo.mp4" poster="assets/local-video-demo-poster.png"
+           aria-label="本地视频播放示例，8秒无声测试片段">
+      您的浏览器不支持此视频格式。
+    </video>
+  </div>
+</div>
+```
+
+## 感谢聆听 · 欢迎讨论 {#course-ending .course-cover .preview-cover .ending-page}
+

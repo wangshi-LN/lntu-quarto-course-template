@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">通用图片占位图</title>
+  <desc id="desc">浅色背景中的圆形与山形几何图案，用于演示图片位置。</desc>
+  <rect width="640" height="480" fill="#edf4f2"/>
+  <rect x="64" y="64" width="512" height="352" rx="10" fill="#f9fbfa" stroke="#9bbdb6" stroke-width="3"/>
+  <circle cx="440" cy="158" r="42" fill="#b9d4cd"/>
+  <path d="M88 384L244 172L394 384Z" fill="#8cb6ab"/>
+  <path d="M276 384L411 241L552 384Z" fill="#518e81"/>
+  <path d="M210 218L244 172L279 222L248 210L232 223Z" fill="#f9fbfa"/>
+</svg>

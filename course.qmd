@@ -1,0 +1,75 @@
+---
+pagetitle: "新课程"
+---
+
+## {{< meta course.name >}} {#course-opening .course-cover .preview-cover}
+
+::: {.cover-school}
+![](assets/school-mark.svg){.cover-school-image fig-alt="学校标识"}
+:::
+
+::: {.cover-subtitle}
+{{< meta course.subtitle >}}
+:::
+
+::: {.cover-teacher}
+授课人：{{< meta course.teacher >}}
+:::
+
+## 内容目录 {#contents-1 .body-header-preview .contents-page data-chapter-title="第一章"}
+
+```{=html}
+<nav class="course-toc" aria-label="内容目录">
+<a class="toc-entry is-chapter-current" href="#/first-content" aria-current="step"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">第一章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry" href="#/second-content"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">第二章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+</nav>
+```
+
+## 本页标题 {#first-content .body-header-preview .single-column-page data-chapter-title="第一章"}
+
+::: {.single-column-content}
+<h3>在这里填写本页的小标题</h3>
+
+这里放置一段简短的说明文字，用于引出本页主题。段落与列表共用一个内容栏，按从上到下的顺序阅读。
+
+- **第一项要点**：用一句话表达一个完整意思。
+- **第二项要点**：保持相同层级的排列方式。
+  - 补充说明放在下一级，使用缩进区分。
+- **第三项要点**：关键词加粗，便于快速定位。
+:::
+
+## 内容目录 {#contents-2 .body-header-preview .contents-page data-chapter-title="第二章"}
+
+```{=html}
+<nav class="course-toc" aria-label="内容目录">
+<a class="toc-entry" href="#/first-content"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">第一章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+<a class="toc-entry is-chapter-current" href="#/second-content" aria-current="step"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">第二章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
+</nav>
+```
+
+## 第二章的本页标题 {#second-content .body-header-preview .two-column-page data-chapter-title="第二章"}
+
+:::: {.two-column-content}
+::: {.text-column}
+<h3>左栏小标题</h3>
+
+这里放置第一组内容。用简短的段落说明这一栏的主题。
+
+- **要点一**：表达主要信息。
+- **要点二**：补充必要说明。
+- **要点三**：保持层次清楚。
+:::
+
+::: {.text-column}
+<h3>右栏小标题</h3>
+
+这里放置第二组内容。可以与左栏并列，也可以相互对照。
+
+- **要点一**：围绕另一主题。
+- **要点二**：采用相同结构。
+- **要点三**：突出两者差异。
+:::
+::::
+
+## 感谢聆听 · 欢迎讨论 {#course-ending .course-cover .preview-cover .ending-page}
+

@@ -1,0 +1,122 @@
+<script>
+// 同步底部通栏背景与逐页圆点进度；分步动画不计作新的一页。
+(function () {
+  function attach() {
+    if (!window.Reveal) { requestAnimationFrame(attach); return; }
+    const footer = document.querySelector('.reveal .footer');
+    if (!footer) return;
+    const teacherLabel = '授课教师：' + (document.getElementById('course-template-config')?.dataset.teacher || '请填写姓名');
+    function lectureMode() {
+      Reveal.configure({scrollActivationWidth:0});
+      if (Reveal.isScrollView && Reveal.isScrollView()) Reveal.toggleScrollView(false);
+    }
+    Reveal.on('ready', lectureMode);
+    if (Reveal.isReady()) lectureMode();
+    const progress = document.createElement('nav');
+    progress.className = 'course-page-progress';
+    progress.setAttribute('aria-label', '课件页面导航');
+    progress.hidden = true;
+    document.querySelector('.reveal').appendChild(progress);
+    // 跳转前释放旧页链接焦点，避免焦点留在即将隐藏的目录页。
+    document.querySelectorAll('.course-toc .toc-entry').forEach(link => {
+      link.addEventListener('click', () => link.blur());
+    });
+    function alignInfoBand() {
+      if (!Reveal.isReady()) return;
+      const slide = Reveal.getCurrentSlide();
+      if (!slide || !slide.classList.contains('body-header-preview')) {
+        progress.hidden = true;
+        return;
+      }
+      const line = getComputedStyle(slide, '::after');
+      const top = slide.getBoundingClientRect().top +
+        (parseFloat(line.top) + parseFloat(line.height)) * Reveal.getScale();
+      document.documentElement.style.setProperty('--course-info-top', top + 'px');
+      const slidesBefore = Reveal.getSlides().slice(0, Reveal.getSlides().indexOf(slide) + 1);
+      const chapter = slide.dataset.chapterTitle ||
+        slidesBefore.reverse().find(item => item.classList.contains('contents-page'))?.dataset.chapterTitle || '';
+      const footerText = (chapter ? chapter + '｜' : '') + teacherLabel;
+      const footerLine = footer.querySelector('p') || footer;
+      if (footerLine.textContent !== footerText) footerLine.textContent = footerText;
+      const left = 64;
+      const width = Math.max(0, footer.getBoundingClientRect().left - left - 20);
+      progress.hidden = !Reveal.getCurrentSlide().classList.contains('body-header-preview') || width < 60;
+      progress.style.left = left + 'px';
+      progress.style.width = width + 'px';
+      // 与页脚文字行的中心对齐，而非与整个底色区域的中心对齐。
+      const textRect = (footer.querySelector('p') || footer).getBoundingClientRect();
+      progress.style.top = (textRect.top + textRect.height / 2 - 14) + 'px';
+      const slides = Reveal.getSlides();
+      const total = slides.length;
+      const current = slides.indexOf(Reveal.getCurrentSlide()) + 1;
+      if (progress.children.length !== total) {
+        // 章节目录开启一组页面；同名章节复用配色，正文继承前一张目录。
+        const chapters = new Map();
+        let chapterKey = '';
+        progress.replaceChildren(...slides.map((target, index) => {
+          const dot = document.createElement('a');
+          const indices = Reveal.getIndices(target);
+          const heading = target.querySelector('h1, h2');
+          const isContents = target.classList.contains('contents-page');
+          const chapterTitle = target.dataset.chapterTitle;
+          const title = isContents && chapterTitle ? '内容目录 · ' + chapterTitle :
+            (heading ? heading.textContent.trim() : '未命名页面');
+          dot.className = 'course-page-dot';
+          dot.classList.toggle('is-contents', isContents);
+          if (isContents || chapterTitle) {
+            chapterKey = (chapterTitle || '').trim() || target.id || 'chapter-' + index;
+            if (!chapters.has(chapterKey)) chapters.set(chapterKey, chapters.size + 1);
+          }
+          const chapter = chapters.get(chapterKey);
+          if (chapter) {
+            dot.dataset.chapter = String(chapter);
+            dot.dataset.chapterTitle = chapterKey;
+            // 前四章配色在 SCSS 中集中设置；新增章节自动分配不同色相。
+            const hue = Math.round((155 + (chapter - 1) * 137.508) % 360);
+            dot.style.setProperty('--dot-past-color',
+              'var(--chapter-progress-' + chapter + ', hsl(' + hue + ', 62%, 40%))');
+          }
+          dot.href = target.id ? '#/' + encodeURIComponent(target.id) :
+            '#/' + indices.h + '/' + (indices.v || 0);
+          dot.title = '第 ' + (index + 1) + ' 页：' + title;
+          dot.setAttribute('aria-label', '跳转到' + dot.title);
+          // 点击封面后导航会隐藏，先释放焦点，保留原生链接跳转。
+          dot.addEventListener('click', () => dot.blur());
+          return dot;
+        }));
+      }
+      // 页数决定圆点数量；空间只影响圆点大小、间距和排列。
+      let diameter = 14;
+      let gap = 5;
+      let columns;
+      do {
+        columns = Math.max(1, Math.min(total, Math.floor((width + gap) / (diameter + gap))));
+        if (Math.ceil(total / columns) * (diameter + gap) - gap <= 28 || diameter <= 4) break;
+        diameter -= 1;
+        gap = diameter < 12 ? 2 : 4;
+      } while (true);
+      progress.style.setProperty('--dot-diameter', diameter + 'px');
+      progress.style.setProperty('--dot-gap', gap + 'px');
+      progress.style.setProperty('--dot-columns', columns);
+      progress.setAttribute('aria-label', '课件页面导航，第 ' + current + ' 页，共 ' + total + ' 页');
+      Array.from(progress.children).forEach((dot, index) => {
+        dot.classList.toggle('is-past', index < current - 1);
+        dot.classList.toggle('is-current', index === current - 1);
+        if (index === current - 1) dot.setAttribute('aria-current', 'page');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+    Reveal.on('ready', alignInfoBand);
+    Reveal.on('resize', alignInfoBand);
+    // 封面切回正文时，等待 Quarto 恢复页脚再计算可用宽度。
+    Reveal.on('slidechanged', () => requestAnimationFrame(alignInfoBand));
+    Reveal.on('slidetransitionend', alignInfoBand);
+    window.addEventListener('resize', alignInfoBand);
+    document.fonts.ready.then(alignInfoBand);
+    if (Reveal.isReady()) alignInfoBand();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attach, {once:true});
+  } else { attach(); }
+})();
+</script>

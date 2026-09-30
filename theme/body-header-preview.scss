@@ -1,0 +1,578 @@
+/*-- scss:defaults --*/
+$body-bg: #ffffff;
+
+/*-- scss:rules --*/
+/* 通用正文样式 v1.0；沿用既有类名以兼容页型片段。 */
+:root { --r-background-color:#ffffff; }
+body { background-color:#ffffff!important; }
+
+/* 4∶3 插画封面：文字位于留白区，校园三主体完整展示。 */
+.reveal .slides > .course-cover.preview-cover {
+  height:768px;
+  padding:0;
+}
+.reveal .course-cover.preview-cover h2 {
+  top:190px;
+  left:64px;
+  right:64px;
+  width:auto;
+  color:#102b33;
+  border:0;
+}
+.reveal .preview-cover .cover-subtitle { top:288px; color:#17454d; }
+.reveal .preview-cover .cover-teacher { top:386px; color:#29474b; }
+.reveal:has(.preview-cover.present) > .progress { display:none!important; }
+
+/* 结束页使用完整图片；保留可访问的标题，不重复叠加可见文字。 */
+.reveal .course-cover.preview-cover.ending-page h2 {
+  position:absolute;
+  top:0;
+  left:0;
+  right:auto;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+}
+
+.reveal .slides > .body-header-preview {
+  position:absolute;
+  box-sizing:border-box;
+  padding:150px 16px 0;
+}
+.reveal .slides > section.body-header-preview::before {
+  content:"";
+  position:absolute;
+  top:122px;
+  left:16px;
+  right:16px;
+  height:3px;
+  background:#0b706e;
+}
+.reveal .body-header-preview > h2 {
+  position:absolute;
+  left:16px;
+  top:34px;
+  right:16px;
+  width:auto;
+  margin:0;
+  font-family:"Source Han Serif CN", "Source Han Serif SC", "思源宋体", "Noto Serif CJK SC", "Noto Serif SC", serif;
+  font-size:48pt;
+  font-weight:300;
+  line-height:1.2;
+  text-align:left;
+  letter-spacing:-.025em;
+}
+/* 通用单栏文字：一条阅读轴，使用间距、字重和缩进区分层次。 */
+.reveal .single-column-page .single-column-content {
+  margin:8px 24px 0;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .single-column-content h3 {
+  font-size:28pt;
+  line-height:1.3;
+  margin:0 0 20px;
+  color:var(--course-accent);
+}
+.reveal .single-column-content p {
+  font-size:24pt;
+  line-height:1.5;
+  margin:0 0 28px;
+}
+.reveal .single-column-content > ul {
+  display:block;
+  margin:0;
+  padding-left:1.2em;
+  font-size:28pt;
+  line-height:1.4;
+}
+.reveal .single-column-content li { margin:0 0 20px; }
+.reveal .single-column-content li::marker { color:#0b706e; }
+.reveal .single-column-content li > ul {
+  display:block;
+  margin:10px 0 0;
+  padding-left:1.4em;
+  font-size:24pt;
+  line-height:1.5;
+}
+.reveal .single-column-content li > ul li { margin:0; }
+/* 通用等宽双栏：纯文字布局，中央细线分隔，标题与首段顶端对齐。 */
+.reveal .two-column-page .two-column-content {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:48px;
+  position:relative;
+  margin:8px 24px 0;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .two-column-content::before {
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:1px;
+  background:#d6e3e0;
+}
+.reveal .two-column-content .text-column { min-width:0; }
+.reveal .two-column-content h3 {
+  font-size:28pt;
+  line-height:1.3;
+  margin:0 0 24px;
+  color:var(--course-accent);
+}
+.reveal .two-column-content p {
+  font-size:24pt;
+  line-height:1.5;
+  margin:0 0 28px;
+}
+.reveal .two-column-content ul {
+  display:block;
+  padding-left:1.1em;
+  margin:0;
+  font-size:24pt;
+  line-height:1.5;
+}
+.reveal .two-column-content li { margin:0 0 24px; }
+.reveal .two-column-content li:last-child { margin-bottom:0; }
+.reveal .two-column-content li::marker { color:#0b706e; }
+/* 上部双栏对比，下部通栏总结。 */
+.reveal .comparison-summary-page .comparison-summary-layout {
+  margin:8px 0 0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:20px;
+  text-align:left;
+}
+.reveal .comparison-summary-page .two-column-content {
+  margin:0;
+  min-height:360px;
+  gap:24px;
+  align-items:stretch;
+}
+.reveal .comparison-summary-page .two-column-content::before { display:none; }
+.reveal .comparison-summary-page .text-column {
+  box-sizing:border-box;
+  padding:16px;
+  background:#edf4f2;
+}
+.reveal .comparison-summary-page .two-column-content h3 { margin-bottom:20px; }
+.reveal .comparison-summary-page .two-column-content ul { line-height:1.4; }
+.reveal .comparison-summary-page .two-column-content li { margin-bottom:12px; }
+.reveal .comparison-summary-page .two-column-content li:last-child { margin-bottom:0; }
+.reveal .comparison-summary-page .comparison-summary-box {
+  box-sizing:border-box;
+  padding:12px 20px;
+  border-top:3px solid #0b706e;
+  background:transparent;
+  color:var(--course-ink);
+}
+.reveal .comparison-summary-box h3 {
+  margin:0 0 8px;
+  font-size:28pt;
+  line-height:1.3;
+  color:var(--course-accent);
+}
+.reveal .comparison-summary-box p {
+  margin:0;
+  font-size:24pt;
+  line-height:1.4;
+}
+/* 通用四块对比：2×2 等宽等高，独立浅色背景，无底部总结区。 */
+.reveal .four-block-page .four-block-layout {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(2,minmax(0,1fr));
+  gap:24px;
+  height:548px;
+  margin:8px 0 0;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .four-block-layout .comparison-block,
+.reveal .three-block-layout .comparison-block {
+  box-sizing:border-box;
+  min-width:0;
+  padding:16px;
+  background:#edf4f2;
+}
+.reveal .four-block-layout h3,
+.reveal .three-block-layout h3 {
+  font-size:28pt;
+  line-height:1.3;
+  margin:0 0 16px;
+  color:var(--course-accent);
+}
+.reveal .four-block-layout p {
+  font-size:24pt;
+  line-height:1.35;
+  margin:0 0 12px;
+}
+.reveal .four-block-layout p:last-child { margin-bottom:0; }
+/* 通用三块对比：一行三列，维度名与说明分行排布。 */
+.reveal .three-block-page .three-block-layout {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:minmax(0,1fr);
+  gap:24px;
+  height:548px;
+  margin:8px 0 0;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .three-block-layout .comparison-block { padding:20px 16px; }
+.reveal .three-block-layout h3 { margin-bottom:28px; }
+.reveal .three-block-layout p {
+  font-size:24pt;
+  line-height:1.4;
+  margin:0 0 28px;
+}
+.reveal .three-block-layout p:last-child { margin-bottom:0; }
+/* 图文混排：图片完整显示，文字独立说明，支持左右互换。 */
+.reveal .image-text-page .image-text-layout {
+  display:grid;
+  grid-template-columns:minmax(0,55fr) minmax(0,45fr);
+  gap:32px;
+  margin:8px 0 0;
+  align-items:start;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .image-text-layout > div { min-width:0; }
+.reveal .image-text-visual .layout-illustration {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  background:#edf4f2;
+}
+.reveal .image-text-caption p {
+  font-size:24pt;
+  line-height:1.4;
+  margin:16px 0 0;
+  color:#526c71;
+}
+.reveal .image-text-copy h3 { font-size:28pt; line-height:1.3; margin:0 0 24px; color:var(--course-accent); }
+.reveal .image-text-copy p { font-size:24pt; line-height:1.4; margin:0 0 24px; }
+.reveal .image-text-copy ul { display:block; font-size:24pt; line-height:1.4; padding-left:1.1em; margin:0; }
+.reveal .image-text-copy li { margin:0 0 16px; }
+.reveal .image-text-copy li::marker { color:#0b706e; }
+.reveal .image-text-page.image-on-right .image-text-layout { grid-template-columns:minmax(0,45fr) minmax(0,55fr); }
+.reveal .image-text-page.image-on-right .image-text-visual { grid-column:2; grid-row:1; }
+.reveal .image-text-page.image-on-right .image-text-copy { grid-column:1; grid-row:1; }
+/* 独立信息卡片网格：编号和标题为一组，说明独立排布。 */
+.reveal .card-grid-page .card-grid-layout {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(2,minmax(0,1fr));
+  gap:24px;
+  height:548px;
+  margin:8px 0 0;
+  text-align:left;
+  color:var(--course-ink);
+}
+.reveal .card-grid-layout .content-card {
+  min-width:0;
+  box-sizing:border-box;
+  padding:20px;
+  background:#f5f8f7;
+  border:1px solid #c9dcd7;
+  border-top:4px solid #0b706e;
+}
+.reveal .content-card-heading { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+.reveal .content-card-heading h3 { margin:0; font-size:28pt; line-height:1.3; color:var(--course-accent); }
+.reveal .content-card-number { font-size:28pt; line-height:1.3; font-weight:700; color:#60897f; }
+.reveal .content-card > p { font-size:24pt; line-height:1.4; margin:0; }
+.reveal .body-header-preview .header-demo-intro p {
+  font-size:28pt;
+  color:var(--course-ink);
+  margin:0 0 20px;
+}
+.reveal .body-header-preview .header-demo-columns {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.reveal .body-header-preview .header-demo-example {
+  box-sizing:border-box;
+  min-height:310px;
+  border-top:3px solid #0b706e;
+  background:#edf2eb;
+  padding:16px 20px;
+}
+.reveal .body-header-preview .header-demo-example h3 {
+  font-size:28pt;
+  color:var(--course-accent);
+  margin:0 0 18px;
+}
+.reveal .body-header-preview .header-demo-example p {
+  font-size:24pt;
+  line-height:1.35;
+  margin:0 0 14px;
+}
+.reveal .body-header-preview .header-demo-example p:last-child { margin:0; }
+.reveal .body-header-preview .header-demo-takeaway p {
+  font-size:28pt;
+  color:var(--course-accent);
+  margin:28px 0 22px;
+}
+.reveal .body-header-preview .source-band { margin-top:8px; }
+
+/* 目录页：四行目录，整行可跳转；序号、标题与说明分级。 */
+.reveal .contents-page .course-toc {
+  position:absolute;
+  top:158px;
+  left:36px;
+  right:36px;
+  height:540px;
+  display:grid;
+  grid-template-rows:repeat(4, 1fr);
+  gap:12px;
+}
+.reveal .contents-page .toc-entry {
+  display:grid;
+  grid-template-columns:84px minmax(0, 1fr) 42px;
+  align-items:center;
+  gap:24px;
+  padding:14px 18px;
+  box-sizing:border-box;
+  border-bottom:1px solid var(--course-line);
+  color:var(--course-ink);
+  text-decoration:none;
+}
+.reveal .contents-page .toc-entry:hover { background:#f0f5f2; }
+.reveal .contents-page .toc-entry.is-chapter-current {
+  background:#e7efed;
+  box-shadow:inset 4px 0 0 #0b706e;
+}
+.reveal .contents-page .toc-entry:focus-visible {
+  outline:3px solid var(--course-accent);
+  outline-offset:2px;
+  background:#f0f5f2;
+}
+.reveal .contents-page .toc-number {
+  font-size:40pt;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+  color:var(--course-accent);
+}
+.reveal .contents-page .toc-copy { display:grid; gap:6px; }
+.reveal .contents-page .toc-title {
+  font-size:28pt;
+  font-weight:700;
+  line-height:1.2;
+  color:var(--course-ink);
+}
+.reveal .contents-page .toc-detail {
+  font-size:24pt;
+  font-weight:400;
+  line-height:1.2;
+  color:#536d72;
+}
+.reveal .contents-page .toc-arrow {
+  font-size:28pt;
+  line-height:1;
+  text-align:right;
+  color:var(--course-accent);
+}
+
+/* 单图页：在上下分隔线之间完整显示原图，不裁切、不拉伸。 */
+.reveal .body-header-preview.single-image-page .single-image-stage {
+  position:absolute;
+  top:137px;
+  bottom:52px;
+  left:16px;
+  right:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  margin:0;
+}
+/* Quarto 在图片外添加段落；取消其盒子，避免段落撑大图片。 */
+.reveal .body-header-preview.single-image-page .single-image-stage > p {
+  display:contents;
+}
+.reveal .body-header-preview.single-image-page .single-image-stage img {
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  margin:0;
+  padding:0;
+  border:0;
+  box-shadow:none;
+  background:transparent;
+}
+
+/* 单视频页：16∶9 官方播放器居中，整张课件仍为 4∶3。 */
+.reveal .body-header-preview.single-video-page .single-video-stage {
+  position:absolute;
+  top:154px;
+  bottom:68px;
+  left:36px;
+  right:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  padding:0;
+}
+.reveal .single-video-page .video-player {
+  position:relative;
+  box-sizing:border-box;
+  width:100%;
+  aspect-ratio:16 / 9;
+  max-height:100%;
+  overflow:hidden;
+  border-radius:4px;
+  background:#000000;
+}
+.reveal .single-video-page .video-embed-frame,
+.reveal .single-video-page .local-video-player {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none;
+  border:0;
+  margin:0;
+  padding:0;
+}
+.reveal .single-video-page .local-video-player {
+  object-fit:contain;
+  background:#000000;
+  font-size:24pt;
+}
+
+/* 章节与教师页脚：12pt 楷体，右对齐，浅色通栏底色配深色文字。 */
+.reveal:has(.body-header-preview.present) .footer,
+.reveal:has(.body-header-preview.present) .footer p {
+  font-size:12pt!important;
+  font-family:"KaiTi", "楷体", "STKaiti", serif!important;
+  font-weight:400;
+  color:#18373e;
+  text-align:right;
+}
+.reveal:has(.body-header-preview.present) .footer {
+  left:auto;
+  right:24px;
+  bottom:10px;
+  width:auto;
+  max-width:calc(100% - 190px);
+  transform:none;
+  margin:0;
+  padding:6px 12px;
+  background:transparent;
+  box-sizing:border-box;
+  z-index:30;
+}
+.reveal:has(.body-header-preview.present) .footer p {
+  line-height:1.3;
+  margin:0;
+}
+.reveal:has(.body-header-preview.present) .slide-number,
+.reveal:has(.body-header-preview.present) > .progress {
+  display:none!important;
+}
+
+/* 每页一个标记：已播放按章节着色、当前页纯黑、未播放空心。 */
+.reveal .course-page-progress {
+  position:fixed;
+  z-index:30;
+  height:28px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:repeat(var(--dot-columns, 1), var(--dot-diameter, 14px));
+  grid-auto-rows:var(--dot-diameter, 14px);
+  align-content:center;
+  justify-content:start;
+  gap:var(--dot-gap, 5px);
+  padding:0;
+  border:0;
+  background:transparent;
+}
+.reveal .course-page-progress[hidden] { display:none; }
+.reveal .course-page-progress {
+  --chapter-progress-1:#237a3b;
+  --chapter-progress-2:#2458c6;
+  --chapter-progress-3:#9533a5;
+  --chapter-progress-4:#bd580a;
+  --dot-past-color:#64716f;
+}
+.reveal .course-page-progress > .course-page-dot {
+  display:block;
+  box-sizing:border-box;
+  width:var(--dot-diameter, 14px);
+  height:var(--dot-diameter, 14px);
+  border:2px solid #67867f;
+  border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+  text-decoration:none;
+}
+.reveal .course-page-progress > .course-page-dot:hover {
+  border-color:#0b706e;
+}
+/* 目录页用菱形，外接宽高仍约为圆点直径，保持间距与中心对齐。 */
+.reveal .course-page-progress > .course-page-dot.is-contents {
+  width:calc(var(--dot-diameter, 14px) * .70710678);
+  height:calc(var(--dot-diameter, 14px) * .70710678);
+  justify-self:center;
+  align-self:center;
+  border-radius:1px;
+  transform:rotate(45deg);
+}
+.reveal .course-page-progress > .course-page-dot:focus-visible {
+  outline:2px solid #0b706e;
+  outline-offset:2px;
+}
+.reveal .course-page-progress > .course-page-dot.is-past {
+  background:var(--dot-past-color);
+  border-color:var(--dot-past-color);
+}
+.reveal .course-page-progress > .course-page-dot.is-current {
+  background:#000000;
+  border-color:#000000;
+}
+
+/* 正文与底部信息栏之间的统一分隔线。 */
+.reveal .slides > section.body-header-preview::after {
+  content:"";
+  position:absolute;
+  top:728px;
+  left:16px;
+  right:16px;
+  height:3px;
+  background:#0b706e;
+  pointer-events:none;
+}
+
+.reveal:has(.body-header-preview.present)::after {
+  content:"";
+  position:fixed;
+  top:var(--course-info-top, 100%);
+  bottom:0;
+  left:0;
+  right:0;
+  background:#e7efed;
+  z-index:0;
+  pointer-events:none;
+}
+
+.reveal .slide-chalkboard-buttons {position:fixed!important;top:12px!important;right:12px!important;left:auto!important;bottom:auto!important;background:rgba(255,255,255,.9);border-radius:6px;padding:4px 8px;}
+#course-template-config {display:none!important;}

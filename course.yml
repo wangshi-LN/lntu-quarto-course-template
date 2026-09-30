@@ -1,0 +1,6 @@
+# 每门新课程按需修改课程名、副标题、教师和校徽路径。首页/尾页背景由模板固定管理。
+course:
+  name: "测试修改模板"
+  subtitle: "请填写副标题"
+  teacher: "请填写姓名"
+  school-logo: "assets/school-mark.svg"

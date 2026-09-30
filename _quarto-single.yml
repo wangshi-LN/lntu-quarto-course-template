@@ -1,0 +1,5 @@
+# 单文件模式不支持本模板所用的 Quarto 内置涂鸦组合。
+format:
+  revealjs:
+    embed-resources: true
+    chalkboard: false

@@ -1,0 +1,59 @@
+<style>
+.reveal .slide-chalkboard-buttons {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.reveal .slide-chalkboard-buttons.hidden { display:none; }
+.reveal .slide-chalkboard-buttons .course-drawing-action {
+  appearance:none;
+  border:1px solid #91b1ac;
+  border-radius:4px;
+  background:#fff;
+  color:#17454d;
+  font:14px/1.3 "Source Han Sans CN",sans-serif;
+  padding:6px 9px;
+  cursor:pointer;
+}
+.reveal .slide-chalkboard-buttons .course-drawing-action:hover { background:#e7efed; }
+.reveal .slide-chalkboard-buttons .course-drawing-action:focus-visible {
+  outline:2px solid #0b706e;
+  outline-offset:2px;
+}
+@media print { .reveal .slide-chalkboard-buttons { display:none!important; } }
+</style>
+<script>
+(function () {
+  let attempts = 0;
+  function attachDrawingActions() {
+    const toolbar = document.querySelector('.slide-chalkboard-buttons');
+    const chalkboard = window.Reveal && Reveal.getPlugin('RevealChalkboard');
+    if (!toolbar || !chalkboard) {
+      if (++attempts < 120) requestAnimationFrame(attachDrawingActions);
+      return;
+    }
+    if (toolbar.querySelector('.course-drawing-action')) return;
+    const actions = [
+      ['删除涂鸦', '清除当前页当前画布的笔迹（Delete），不影响其他页', () => chalkboard.clear()],
+      ['导出涂鸦', '导出整份课件的页面批注与黑板笔迹为 JSON 文件', () => chalkboard.download()]
+    ];
+    for (const [label, description, run] of actions) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'course-drawing-action';
+      button.textContent = label;
+      button.title = description;
+      button.setAttribute('aria-label', label);
+      button.addEventListener('pointerdown', event => event.stopPropagation());
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        run();
+        button.blur();
+      });
+      toolbar.appendChild(button);
+    }
+  }
+  window.addEventListener('load', attachDrawingActions, { once:true });
+})();
+</script>

@@ -1,0 +1,157 @@
+/* Quarto 通用课程模板 v1.0：已确认的公共视觉基线。 */
+/*-- scss:defaults --*/
+// 字体统一配置：可分别指定中文正文、页面标题和英文对照区。
+$course-font-body: "Source Han Sans CN", "Source Han Sans SC", "思源黑体", "Noto Sans SC", "Noto Sans CJK SC", sans-serif;
+$course-font-heading: $course-font-body;
+$course-font-english: $course-font-body;
+$font-family-sans-serif: $course-font-body;
+$font-family-monospace: "Consolas", "Source Han Sans SC", "Noto Sans SC", monospace;
+$presentation-font-size-root: 32px; // 24pt；正文最小字号
+$presentation-heading-font: $course-font-heading;
+$presentation-heading-color: #18373e;
+$presentation-heading-font-weight: 700;
+$presentation-heading-line-height: 1.25;
+$presentation-h2-font-size: 48pt;
+$presentation-h3-font-size: 28pt;
+$body-bg: #faf9f5;
+$body-color: #29474e;
+$link-color: #0b706e;
+$selection-bg: #d7e7c1;
+$code-block-bg: #edf2ed;
+$code-block-border-color: #d6dfd6;
+$code-color: #0b706e;
+
+/*-- scss:rules --*/
+/* Adobe 官方思源字体，保留原文件与 SIL OFL 许可，默认外置；单文件导出时嵌入 HTML。 */
+:root { --course-ink:#18373e; --course-accent:#0b706e; --course-emphasis:#B42318; --course-muted:#61777c; --course-line:#ccd9d4; --course-tint:#edf2eb; --course-mark:#e0edbf; }
+.reveal .slides { text-align:left; }
+.reveal .slides>section { box-sizing:border-box; padding:10px 14px 0; }
+.reveal h2 { font-size:48pt; letter-spacing:-.025em; margin:0 0 18px; }
+.reveal h3 { font-size:28pt; line-height:1.35; margin:0 0 20px; }
+.reveal p { line-height:1.35; margin:0 0 14px; }
+.reveal .slides strong, .reveal .slides b { color:var(--course-emphasis); }
+.reveal a { text-decoration-thickness:1px; text-underline-offset:4px; }
+.reveal .lead { color:var(--course-muted); font-size:24pt; margin:0 0 18px; }
+.reveal .lead p { margin:0; }
+.reveal .columns { display:flex; flex-wrap:nowrap; align-items:flex-start; justify-content:space-between; gap:35px; }
+.reveal .columns>.column { box-sizing:border-box; float:none; min-width:0; }
+.reveal .source-band { margin-top:14px; border-top:1px solid var(--course-line); padding-top:8px; font-size:24pt; color:var(--course-muted); }
+.reveal .source-band p { margin:0; line-height:1.3; }
+.reveal .takeaway { margin-top:25px; font-size:24pt; color:var(--course-accent); }
+.reveal .takeaway p { margin-bottom:0; }
+.reveal .footer { color:#708282; font-size:24pt; bottom:13px; }
+.reveal .slide-number { background:transparent; color:var(--course-accent); font:24pt "Consolas",monospace; right:24px; bottom:13px; }
+.reveal .controls { color:var(--course-accent); font-size:9px; }
+.reveal .progress { color:var(--course-accent); height:3px; }
+.reveal .slide-menu-button { color:var(--course-accent); }
+.reveal .micro-label { font-size:24pt; color:var(--course-accent); letter-spacing:.04em; margin-bottom:12px; }
+.reveal .muted { color:var(--course-muted); }
+.reveal code { font-family:$font-family-monospace; }
+.reveal code:not(pre code) { background:#e6eee5; padding:3px 7px; border-radius:2px; font-size:24pt; }
+.reveal pre { width:100%; font-size:24pt; box-shadow:none; }
+.reveal pre code { line-height:1.6; padding:22px!important; max-height:420px; }
+.reveal table { width:100%; font-size:24pt; }
+.reveal table th,.reveal table td { border-color:var(--course-line); padding:12px 14px; }
+.reveal table th { color:var(--course-accent); border-bottom:2px solid var(--course-accent); }
+.reveal math { font-family:"Cambria Math",math; }
+
+/* 01：PPT式课程封面；校徽和背景由QMD中的图片路径控制。 */
+.reveal .slides>.course-cover { height:720px; padding:0; }
+.reveal .course-cover h2 { position:absolute; top:228px; left:64px; width:1120px; margin:0; font-size:48pt; font-weight:700; letter-spacing:.025em; line-height:1.3; }
+.reveal .cover-school { position:absolute; top:38px; left:64px; width:340px; height:86px; }
+.reveal .cover-school p { margin:0; }
+.reveal .cover-school img { display:block; width:340px; height:86px; max-height:86px; margin:0; object-fit:contain; object-position:left center; }
+.reveal .cover-subtitle { position:absolute; top:328px; left:68px; font-size:40pt; color:var(--course-accent); letter-spacing:.06em; }
+.reveal .cover-teacher { position:absolute; top:470px; left:70px; font-size:28pt; color:var(--course-ink); }
+.reveal:has(.course-cover.present) .footer,
+.reveal:has(.course-cover.present) .slide-number { display:none!important; }
+
+/* 02：概念与对照。颜色表示强调，不依赖颜色区分含义。 */
+.reveal .concept-statement { font-size:32pt; font-weight:650; color:var(--course-accent); letter-spacing:-.03em; margin:23px 0 26px; }
+.reveal .concept-statement p { line-height:1.4; margin:0; }
+.reveal .concept-page .column>p { font-size:24pt; }
+.reveal .comparison { border-left:1px solid var(--course-line); padding-left:35px; }
+.reveal .comparison-row { border-bottom:1px solid var(--course-line); padding:4px 0 18px; margin-bottom:20px; }
+.reveal .comparison-row:last-child { border-bottom:0; margin-bottom:0; }
+.reveal .comparison-row p { font-size:24pt; line-height:1.35; margin-bottom:15px; }
+
+/* 03：按步骤讲授。 */
+.reveal .process-list { margin-top:10px; }
+.reveal .process-row { display:grid; grid-template-columns:340px 1fr; gap:26px; padding:14px 0; border-bottom:1px solid var(--course-line); }
+.reveal .process-number { display:inline-block; color:var(--course-accent); font:28pt "Consolas",monospace; margin-right:22px; }
+.reveal .process-heading p { margin:0; font-size:24pt; }
+.reveal .process-detail p { font-size:24pt; line-height:1.3; margin:0; }
+.reveal .process-detail .record { font-size:24pt; color:var(--course-muted); }
+
+/* 04：结构关系。 */
+.reveal .structure-rail,.reveal .structure-end { font-size:24pt; }
+.reveal .structure-rail { padding:15px 20px; background:var(--course-tint); margin-bottom:13px; }
+.reveal .structure-rail p,.reveal .structure-end p { margin:0; }
+.reveal .structure-map { border-top:2px solid var(--course-accent); }
+.reveal .structure-row { display:grid; grid-template-columns:380px 1fr; align-items:center; gap:25px; border-bottom:1px solid var(--course-line); padding:8px 16px; }
+.reveal .structure-name p { font-size:24pt; margin:0; line-height:1.4; }
+.reveal .structure-name p:last-child { font-size:24pt; color:var(--course-muted); }
+.reveal .structure-row>p { font-size:24pt; margin:0; }
+.reveal .structure-end { padding:14px 20px 0; }
+.reveal .structure-page .source-band { margin-top:18px; }
+
+/* 05：原文与旁注。高亮片段始终可读，按步骤加亮。 */
+.reveal .passage { background:white; border-left:4px solid var(--course-accent); padding:23px 27px 17px; }
+.reveal .passage>p { font-size:24pt; line-height:1.35; margin-bottom:16px; text-align:justify; }
+.reveal .fragment.passage-mark { opacity:1; visibility:visible; transition:background-color .25s; }
+.reveal .fragment.passage-mark.visible { background:var(--course-mark); color:var(--course-ink); }
+.reveal .margin-comments { padding-top:9px; }
+.reveal .annotation { margin-bottom:25px; border-top:2px solid var(--course-accent); padding-top:12px; }
+.reveal .annotation h3 { font-size:28pt; margin-bottom:9px; color:var(--course-accent); }
+.reveal .annotation p { font-size:24pt; line-height:1.35; margin:0; }
+
+/* 06：中英对照与符号例示。 */
+.reveal .language-panel { border-top:3px solid var(--course-accent); padding:18px 20px; background:var(--course-tint); min-height:292px; }
+.reveal .language-panel h3 { color:var(--course-accent); font-size:28pt; margin-bottom:18px; }
+.reveal .language-panel>p { font-size:24pt; line-height:1.35; }
+.reveal .language-panel.english>p { font-size:24pt; }
+.reveal .language-meta { color:var(--course-muted); font-size:24pt; margin-top:18px; }
+.reveal .language-meta p { margin:0; }
+.reveal .term-example { margin-top:18px; font-size:24pt; }
+.reveal .term-example p { margin-bottom:0; }
+
+/* 07：任务驱动的工具演示。 */
+.reveal .tool-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+.reveal .tool-step { padding:14px 16px; border-top:3px solid var(--course-accent); background:var(--course-tint); }
+.reveal .tool-step h3 { margin:10px 0 12px; font-size:28pt; }
+.reveal .tool-step>p { font-size:24pt; line-height:1.35; margin-bottom:0; }
+.reveal .tool-detail { font-size:24pt; color:var(--course-muted); margin-top:14px; }
+.reveal .tool-detail p { margin:0; }
+.reveal .tool-output { margin-top:25px; padding:15px 0; font-size:24pt; border-bottom:1px solid var(--course-line); }
+.reveal .tool-output p { margin-bottom:10px; }
+.reveal .tool-page .source-band { border-top:0; padding-top:0; margin-top:14px; }
+
+/* 08：小结。 */
+.reveal .summary-row { display:grid; grid-template-columns:70px 190px 1fr; align-items:center; gap:20px; border-bottom:1px solid var(--course-line); padding:16px 0; }
+.reveal .summary-row p { font-size:24pt; margin:0; }
+.reveal .summary-row p:last-child { font-size:24pt; color:var(--course-muted); }
+@media (prefers-reduced-motion:reduce) { * { animation:none!important; transition:none!important; } }
+
+/* 字号层级：24pt 起，每级增加 4pt；48pt 为所有页面标题。禁止自动缩小正文。 */
+.reveal .text-level-0 { font-size:24pt; }
+.reveal .text-level-1 { font-size:28pt; }
+.reveal .text-level-2 { font-size:32pt; }
+.reveal .text-level-3 { font-size:36pt; }
+.reveal .text-level-4 { font-size:40pt; }
+.reveal .text-level-5 { font-size:44pt; }
+.reveal .text-level-6 { font-size:48pt; }
+.reveal .slides small, .reveal .slides figcaption { font-size:24pt; }
+.reveal .slides sub, .reveal .slides sup { font-size:24pt; }
+
+/* 大字号下压缩装饰性留白，内容仍保持 24pt 以上。 */
+.reveal .concept-page .comparison-row { padding:0 0 8px; margin-bottom:10px; }
+.reveal .concept-page .comparison-row p { margin-bottom:8px; }
+.reveal .concept-page .source-band { margin-top:8px; }
+.reveal .source-band p { line-height:1.2; }
+.reveal .tool-detail p { line-height:1.25; }
+.reveal .structure-name p:first-child { font-size:28pt; }
+.reveal .process-heading p, .reveal .summary-row strong { font-size:28pt; }
+
+.reveal .english { font-family:$course-font-english; }
+.reveal .footer, .reveal .footer p { font-size:24pt!important; }
+.reveal .slide-number, .reveal .slide-number a, .reveal .slide-number span { font-size:24pt!important; }

@@ -1,0 +1,14 @@
+{
+  "version": "1.4.0",
+  "date": "2026-09-30",
+  "reference": "课程模板-学术写作样页-2026-09-19",
+  "user_acceptance": "用户反馈：压测做完了，目前的版本来看没有什么问题。未提供详细测试报告或设备参数。",
+  "changes": ["首页与尾页固定使用模板内置背景素材，不再从 course.yml 覆盖；继承 v1.1 的深朱红加粗强调与 v1.3 chalkboard 实线设置。"],
+  "source_files": {
+    "body-header-preview.qmd": "67625952bf2126fb2c7c570c2f5d7a3f8ea897986a35487bd07c4ee9409b9e86",
+    "body-header-preview.scss": "be722673e1e8e72647145b00a8755a1c5e6db2ab29ecd5a302d9c98541a2f58c",
+    "course-theme.scss": "0b4f03d91429632b6cc4b06726ff823f928d40d1a47e8f29825dd3b7f1167694",
+    "body-header-preview-footer.html": "8cb991e27b9a38b1539713a1c2e0856dd59f8677c93ba16b1c618591311a2ca0",
+    "chalkboard-controls.html": "202f99a3026cd17245b3b430b3aa109335b1fef900f4ff021694cf7b30dfec85"
+  }
+}

@@ -1,0 +1,44 @@
+project:
+  type: default
+  render: [course.qmd, layouts.qmd]
+metadata-files: [course.yml]
+filters: [theme/course-config.lua]
+lang: zh
+format:
+  revealjs:
+    theme: [white, theme/course-theme.scss, theme/body-header-preview.scss]
+    width: 1024
+    height: 768
+    margin: 0.035
+    slide-level: 2
+    center: false
+    embed-resources: false
+    chalkboard:
+      chalk-effect: 0.000000000000001
+    transition: fade
+    transition-speed: fast
+    navigation-mode: linear
+    controls: true
+    controls-layout: edges
+    progress: false
+    slide-number: false
+    menu: true
+    overview: true
+    touch: true
+    keyboard: true
+    hash: true
+    history: false
+    scroll-view:
+      activation-width: 0
+    view-distance: 2
+    mobile-view-distance: 1
+    preload-iframes: false
+    auto-play-media: false
+    preview-links: false
+    code-copy: false
+    code-line-numbers: false
+    code-overflow: wrap
+    html-math-method: mathml
+    footer: "授课教师"
+    include-in-header: [theme/head.html, theme/fonts.html]
+    include-after-body: [theme/body-header-preview-footer.html, theme/chalkboard-controls.html]

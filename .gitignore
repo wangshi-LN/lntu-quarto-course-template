@@ -1,0 +1,12 @@
+.quarto/
+*.log
+**/*.quarto_ipynb
+
+# Render output is kept locally; source and required assets are tracked.
+/course.html
+/course-single.html
+/layouts.html
+/course_files/
+/layouts_files/
+/validation.json
+/SHA256SUMS.txt
