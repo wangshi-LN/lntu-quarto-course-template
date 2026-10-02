@@ -30,6 +30,8 @@ $code-color: #0b706e;
 .reveal h3 { font-size:28pt; line-height:1.35; margin:0 0 20px; }
 .reveal p { line-height:1.35; margin:0 0 14px; }
 .reveal .slides strong, .reveal .slides b { color:var(--course-emphasis); }
+/* Markdown 单星号强调：28pt 正体（非斜体）。 */
+.reveal .slides em { font-size:28pt; font-style:normal; }
 .reveal a { text-decoration-thickness:1px; text-underline-offset:4px; }
 .reveal .lead { color:var(--course-muted); font-size:24pt; margin:0 0 18px; }
 .reveal .lead p { margin:0; }

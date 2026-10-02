@@ -101,4 +101,6 @@ python serve.py
 
 字体定义在 `theme/fonts.html`；公共样式在 `theme/course-theme.scss`，已确认的4∶3具体版式在 `theme/body-header-preview.scss`。沿用既有类名以保持兼容。标题48pt、封面副标题40pt、一般小标题28pt、正文24pt，内容超量时拆页。
 
+Markdown 单星号 `*文字*` 显示为 28pt、正体（非斜体）。
+
 `BASELINE.json` 记录来源与原始文件校验值，`SHA256SUMS.txt` 标识本版本交付文件。修改课程副本后校验值自然变化，不要把变化误判为损坏。后续模板升级应新建版本目录，避免覆盖已制作课程。
