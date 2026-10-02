@@ -99,7 +99,7 @@ python serve.py
 
 首页固定使用 `assets/lntu-illustrated-background-4x3.png`，尾页固定使用 `assets/lntu-ending-artwork-4x3.png`。课程副本编辑 `course.yml` 时无需填写或调整这两张背景图；模板生成流程会继续携带它们。
 
-字体定义在 `theme/fonts.html`；公共样式在 `theme/course-theme.scss`，已确认的4∶3具体版式在 `theme/body-header-preview.scss`。沿用既有类名以保持兼容。标题48pt、封面副标题40pt、一般小标题28pt、正文24pt，内容超量时拆页。
+字体定义在 `theme/fonts.html`；公共样式在 `theme/course-theme.scss`，已确认的4∶3具体版式在 `theme/body-header-preview.scss`。沿用既有类名以保持兼容。标题48pt、封面副标题40pt、三级标题32pt、正文24pt，内容超量时拆页。
 
 Markdown 单星号 `*文字*` 显示为 28pt、正体（非斜体）。
 

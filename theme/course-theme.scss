@@ -12,7 +12,7 @@ $presentation-heading-color: #18373e;
 $presentation-heading-font-weight: 700;
 $presentation-heading-line-height: 1.25;
 $presentation-h2-font-size: 48pt;
-$presentation-h3-font-size: 28pt;
+$presentation-h3-font-size: 32pt;
 $body-bg: #faf9f5;
 $body-color: #29474e;
 $link-color: #0b706e;
@@ -27,7 +27,7 @@ $code-color: #0b706e;
 .reveal .slides { text-align:left; }
 .reveal .slides>section { box-sizing:border-box; padding:10px 14px 0; }
 .reveal h2 { font-size:48pt; letter-spacing:-.025em; margin:0 0 18px; }
-.reveal h3 { font-size:28pt; line-height:1.35; margin:0 0 20px; }
+.reveal h3 { font-size:32pt; line-height:1.35; margin:0 0 20px; }
 .reveal p { line-height:1.35; margin:0 0 14px; }
 .reveal .slides strong, .reveal .slides b { color:var(--course-emphasis); }
 /* Markdown 单星号强调：28pt 正体（非斜体）。 */
@@ -104,12 +104,12 @@ $code-color: #0b706e;
 .reveal .fragment.passage-mark.visible { background:var(--course-mark); color:var(--course-ink); }
 .reveal .margin-comments { padding-top:9px; }
 .reveal .annotation { margin-bottom:25px; border-top:2px solid var(--course-accent); padding-top:12px; }
-.reveal .annotation h3 { font-size:28pt; margin-bottom:9px; color:var(--course-accent); }
+.reveal .annotation h3 { font-size:32pt; margin-bottom:9px; color:var(--course-accent); }
 .reveal .annotation p { font-size:24pt; line-height:1.35; margin:0; }
 
 /* 06：中英对照与符号例示。 */
 .reveal .language-panel { border-top:3px solid var(--course-accent); padding:18px 20px; background:var(--course-tint); min-height:292px; }
-.reveal .language-panel h3 { color:var(--course-accent); font-size:28pt; margin-bottom:18px; }
+.reveal .language-panel h3 { color:var(--course-accent); font-size:32pt; margin-bottom:18px; }
 .reveal .language-panel>p { font-size:24pt; line-height:1.35; }
 .reveal .language-panel.english>p { font-size:24pt; }
 .reveal .language-meta { color:var(--course-muted); font-size:24pt; margin-top:18px; }
@@ -120,7 +120,7 @@ $code-color: #0b706e;
 /* 07：任务驱动的工具演示。 */
 .reveal .tool-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
 .reveal .tool-step { padding:14px 16px; border-top:3px solid var(--course-accent); background:var(--course-tint); }
-.reveal .tool-step h3 { margin:10px 0 12px; font-size:28pt; }
+.reveal .tool-step h3 { margin:10px 0 12px; font-size:32pt; }
 .reveal .tool-step>p { font-size:24pt; line-height:1.35; margin-bottom:0; }
 .reveal .tool-detail { font-size:24pt; color:var(--course-muted); margin-top:14px; }
 .reveal .tool-detail p { margin:0; }
