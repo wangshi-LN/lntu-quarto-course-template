@@ -459,7 +459,7 @@ body { background-color:#ffffff!important; }
   font-size:24pt;
 }
 
-/* 章节与教师页脚：12pt 楷体，右对齐，浅色通栏底色配深色文字。 */
+/* 底栏等分左右两区；右区章节与教师使用12pt楷体、右对齐。 */
 .reveal:has(.body-header-preview.present) .footer,
 .reveal:has(.body-header-preview.present) .footer p {
   font-size:12pt!important;
@@ -469,19 +469,26 @@ body { background-color:#ffffff!important; }
   text-align:right;
 }
 .reveal:has(.body-header-preview.present) .footer {
-  left:auto;
-  right:24px;
-  bottom:10px;
-  width:auto;
-  max-width:calc(100% - 190px);
+  position:fixed;
+  top:var(--course-info-top, 100%);
+  left:50%;
+  right:0;
+  bottom:0;
+  width:50%;
+  max-width:none;
+  height:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
   transform:none;
   margin:0;
-  padding:6px 12px;
+  padding:6px 36px 6px 20px;
   background:transparent;
   box-sizing:border-box;
   z-index:30;
 }
 .reveal:has(.body-header-preview.present) .footer p {
+  min-width:0;
   line-height:1.3;
   margin:0;
 }
@@ -494,7 +501,11 @@ body { background-color:#ffffff!important; }
 .reveal .course-page-progress {
   position:fixed;
   z-index:30;
-  height:28px;
+  top:var(--course-info-top, 100%);
+  bottom:0;
+  left:0;
+  width:50%;
+  height:auto;
   box-sizing:border-box;
   display:grid;
   grid-template-columns:repeat(var(--dot-columns, 1), var(--dot-diameter, 14px));
@@ -502,7 +513,7 @@ body { background-color:#ffffff!important; }
   align-content:center;
   justify-content:start;
   gap:var(--dot-gap, 5px);
-  padding:0;
+  padding:6px 20px 6px 64px;
   border:0;
   background:transparent;
 }

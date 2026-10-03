@@ -38,14 +38,15 @@
       const footerText = (chapter ? chapter + '｜' : '') + teacherLabel;
       const footerLine = footer.querySelector('p') || footer;
       if (footerLine.textContent !== footerText) footerLine.textContent = footerText;
-      const left = 64;
-      const width = Math.max(0, footer.getBoundingClientRect().left - left - 20);
-      progress.hidden = !Reveal.getCurrentSlide().classList.contains('body-header-preview') || width < 60;
-      progress.style.left = left + 'px';
-      progress.style.width = width + 'px';
-      // 与页脚文字行的中心对齐，而非与整个底色区域的中心对齐。
-      const textRect = (footer.querySelector('p') || footer).getBoundingClientRect();
-      progress.style.top = (textRect.top + textRect.height / 2 - 14) + 'px';
+      // 左右区域由CSS固定等分；导航只读取自身可用空间，与右侧文字无关。
+      progress.hidden = false;
+      const progressStyle = getComputedStyle(progress);
+      const width = Math.max(0, progress.clientWidth -
+        parseFloat(progressStyle.paddingLeft) - parseFloat(progressStyle.paddingRight));
+      const height = Math.min(28, Math.max(0, progress.clientHeight -
+        parseFloat(progressStyle.paddingTop) - parseFloat(progressStyle.paddingBottom)));
+      progress.hidden = width < 60 || height <= 0;
+      if (progress.hidden) return;
       const slides = Reveal.getSlides();
       const total = slides.length;
       const current = slides.indexOf(Reveal.getCurrentSlide()) + 1;
@@ -91,7 +92,7 @@
       let columns;
       do {
         columns = Math.max(1, Math.min(total, Math.floor((width + gap) / (diameter + gap))));
-        if (Math.ceil(total / columns) * (diameter + gap) - gap <= 28 || diameter <= 4) break;
+        if (Math.ceil(total / columns) * (diameter + gap) - gap <= height || diameter <= 4) break;
         diameter -= 1;
         gap = diameter < 12 ? 2 : 4;
       } while (true);
@@ -108,7 +109,7 @@
     }
     Reveal.on('ready', alignInfoBand);
     Reveal.on('resize', alignInfoBand);
-    // 封面切回正文时，等待 Quarto 恢复页脚再计算可用宽度。
+    // 封面切回正文时，等待当前页状态更新后计算导航区自身的可用空间。
     Reveal.on('slidechanged', () => requestAnimationFrame(alignInfoBand));
     Reveal.on('slidetransitionend', alignInfoBand);
     window.addEventListener('resize', alignInfoBand);
