@@ -18,13 +18,11 @@ pagetitle: "通用课件模板 · 全部版式"
 
 ## 内容目录 {#contents-1 .body-header-preview .contents-page data-chapter-title="文字排版"}
 
-```{=html}
-<nav class="course-toc" aria-label="内容目录">
-<a class="toc-entry is-chapter-current" href="#/single-column-text" aria-current="step"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry" href="#/comparison-summary"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry" href="#/single-image-preview"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-</nav>
-```
+::: {.course-toc current="1"}
+- [文字排版](#/single-column-text "单栏文字 · 双栏文字")
+- [内容比较](#/comparison-summary "双栏总结 · 三块四块 · 卡片网格")
+- [媒体展示](#/single-image-preview "单图 · 图文 · 网络与本地视频")
+:::
 
 ## 单栏文字 {#single-column-text .body-header-preview .single-column-page data-chapter-title="文字排版"}
 
@@ -65,13 +63,11 @@ pagetitle: "通用课件模板 · 全部版式"
 
 ## 内容目录 {#contents-2 .body-header-preview .contents-page data-chapter-title="内容比较"}
 
-```{=html}
-<nav class="course-toc" aria-label="内容目录">
-<a class="toc-entry" href="#/single-column-text"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry is-chapter-current" href="#/comparison-summary" aria-current="step"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry" href="#/single-image-preview"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-</nav>
-```
+::: {.course-toc current="2"}
+- [文字排版](#/single-column-text "单栏文字 · 双栏文字")
+- [内容比较](#/comparison-summary "双栏总结 · 三块四块 · 卡片网格")
+- [媒体展示](#/single-image-preview "单图 · 图文 · 网络与本地视频")
+:::
 
 ## 双栏对比与总结 {#comparison-summary .body-header-preview .two-column-page .comparison-summary-page data-chapter-title="内容比较"}
 
@@ -209,13 +205,11 @@ pagetitle: "通用课件模板 · 全部版式"
 
 ## 内容目录 {#contents-3 .body-header-preview .contents-page data-chapter-title="媒体展示"}
 
-```{=html}
-<nav class="course-toc" aria-label="内容目录">
-<a class="toc-entry" href="#/single-column-text"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">文字排版</span><span class="toc-detail">单栏文字 · 双栏文字</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry" href="#/comparison-summary"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">内容比较</span><span class="toc-detail">双栏总结 · 三块四块 · 卡片网格</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry is-chapter-current" href="#/single-image-preview" aria-current="step"><span class="toc-number">03</span><span class="toc-copy"><span class="toc-title">媒体展示</span><span class="toc-detail">单图 · 图文 · 网络与本地视频</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-</nav>
-```
+::: {.course-toc current="3"}
+- [文字排版](#/single-column-text "单栏文字 · 双栏文字")
+- [内容比较](#/comparison-summary "双栏总结 · 三块四块 · 卡片网格")
+- [媒体展示](#/single-image-preview "单图 · 图文 · 网络与本地视频")
+:::
 
 ## 单张图片 {#single-image-preview .body-header-preview .single-image-page data-chapter-title="媒体展示"}
 

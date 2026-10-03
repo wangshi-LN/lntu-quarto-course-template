@@ -18,12 +18,10 @@ pagetitle: "新课程"
 
 ## 内容目录 {#contents-1 .body-header-preview .contents-page data-chapter-title="第一章"}
 
-```{=html}
-<nav class="course-toc" aria-label="内容目录">
-<a class="toc-entry is-chapter-current" href="#/first-content" aria-current="step"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">第一章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry" href="#/second-content"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">第二章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-</nav>
-```
+::: {.course-toc current="1"}
+- [第一章](#/first-content "在这里填写章节说明")
+- [第二章](#/second-content "在这里填写章节说明")
+:::
 
 ## 本页标题 {#first-content .body-header-preview .single-column-page data-chapter-title="第一章"}
 
@@ -40,12 +38,10 @@ pagetitle: "新课程"
 
 ## 内容目录 {#contents-2 .body-header-preview .contents-page data-chapter-title="第二章"}
 
-```{=html}
-<nav class="course-toc" aria-label="内容目录">
-<a class="toc-entry" href="#/first-content"><span class="toc-number">01</span><span class="toc-copy"><span class="toc-title">第一章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-<a class="toc-entry is-chapter-current" href="#/second-content" aria-current="step"><span class="toc-number">02</span><span class="toc-copy"><span class="toc-title">第二章</span><span class="toc-detail">在这里填写章节说明</span></span><span class="toc-arrow" aria-hidden="true">→</span></a>
-</nav>
-```
+::: {.course-toc current="2"}
+- [第一章](#/first-content "在这里填写章节说明")
+- [第二章](#/second-content "在这里填写章节说明")
+:::
 
 ## 第二章的本页标题 {#second-content .body-header-preview .two-column-page data-chapter-title="第二章"}
 

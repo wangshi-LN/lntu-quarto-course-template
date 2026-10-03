@@ -46,7 +46,22 @@ git diff
 
 内容版式：单栏文字、双栏文字、双栏对比加总结、四块对比、三块对比、卡片网格、单张图片、图文混排、B站嵌入视频、本地视频。示例文案只解释布局，不属于任何课程的正式内容。
 
-正文中的 `data-chapter-title="第一章"` 决定右下角章节名称和导航配色；教师来自 `course.yml`，不需要逐页修改。目录中的标题、说明和目标链接在QMD中维护。新增页面务必更改 `#页面ID`，目录链接使用 `#/页面ID`。每章开始复制一张目录页，并把当前项的 `is-chapter-current` 与 `aria-current="step"` 移到对应章节。
+正文中的 `data-chapter-title="第一章"` 决定右下角章节名称和导航配色；教师来自 `course.yml`，不需要逐页修改。目录中的标题、说明和目标链接使用 Markdown 在 QMD 中维护，无须编写 HTML。新增页面务必更改 `#页面ID`，目录链接使用 `#/页面ID`。
+
+每章开始复制一张目录页，只需调整页面 ID、`data-chapter-title` 与 `current`：
+
+```markdown
+## 内容目录 {#contents-1 .body-header-preview .contents-page data-chapter-title="第一章"}
+
+::: {.course-toc current="1"}
+- [第一章](#/first-content "在这里填写章节说明")
+- [第二章](#/second-content "在这里填写章节说明")
+:::
+```
+
+列表顺序自动生成 `01`、`02` 等编号；`current="1"` 表示突出第 1 项，第二章改为 `current="2"`，以此类推。省略 `current` 时不突出任何项。方括号内填写章节标题，链接指向该章正文首页，双引号内填写显示在标题下方的章节说明（可省略）。每一项仅写一个链接，不在目录块内混写其他段落或嵌套列表。
+
+`theme/course-config.lua` 将这种 Markdown 输入转换为已有目录结构，继续使用原有目录样式与导航。转换仅接受上述目录块和链接条目形状，其他内容保留原样；既有 HTML 目录仍兼容。
 
 可将 `subtitle` 设置为空字符串。`pagetitle` 是QMD顶部的浏览器标签标题，可按课程自行修改。标题过长时缩短或合理换行，不能通过缩字挤满封面。
 
