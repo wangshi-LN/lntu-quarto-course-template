@@ -6,6 +6,16 @@
 
 ## 使用环境
 
+### 下载后直接播放
+
+下载 [v1.5.0 完整课件包（ZIP）](https://github.com/wangshi-LN/lntu-quarto-course-template/releases/download/v1.5.0/lntu-quarto-course-template-v1.5.0.zip)，将整个 ZIP 解压到普通文件夹，然后双击 `打开课件.cmd` 或 `course.html`。查看全部版式时，双击 `查看版式.cmd` 或 `layouts.html`。无需运行生成脚本，也无需安装 Quarto、Python、R 或 Jupyter。
+
+包内同时包含 HTML、配套资源、字体、图片、本地示例视频、可编辑源码和许可说明。请保留解压后的目录结构，不要只取出 HTML，也不要在 ZIP 预览窗口里直接打开。网络视频需要联网；按 `S` 打开演讲者模式时需允许浏览器弹窗。
+
+GitHub 自动提供的 `Source code (zip)` / `Source code (tar.gz)` 是源码归档；直接播放请下载上面命名的完整课件包。完整包中的课件为模板示例，不包含三讲学术写作课程内容。包内附有 SHA-256 文件清单，Release 同时提供 ZIP 校验值。
+
+### 编辑和生成
+
 - 编辑和生成：已验证 Windows、PowerShell、Quarto 1.10.18；不需要 R 或 Jupyter。
 - 播放：生成后直接打开 HTML，播放电脑不需要安装 Quarto；须同时携带相应资源目录。
 - 涂鸦双窗口同步：已验证 Chromium 155.0.8059.40 的本地 `file://` 方式，详见下文。
@@ -34,6 +44,8 @@ git diff
 ```
 
 完成一组修改并检查后，提交对应源文件；正式发布时添加版本标签。HTML、渲染资源目录和缓存保留在本地，不纳入 Git，修改源文件后运行 `生成课件.cmd` 更新。需要分发时导出包含 HTML、资源和素材的完整包；仅导出 Git 源码不能直接替代可播放的课件包。
+
+维护者制作分发包时，先运行 `build.ps1 -Target all`，再运行 `python scripts/package-release.py --version 1.5.0 --date 2026-10-14 --output-dir <已有输出目录>`。脚本要求源码已提交，读取当前提交的源码并打入两份已生成的 HTML 及完整资源目录，校验 ZIP 内各文件的 SHA-256；不会将生成文件纳入 Git。
 
 ## 最短使用流程
 
