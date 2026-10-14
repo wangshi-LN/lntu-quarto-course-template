@@ -1,0 +1,218 @@
+<script>
+/* Speaker View bridge for Quarto's RevealChalkboard 2.3.3.
+ * Uses its welcome/broadcast/received/seekplayback events, without changing
+ * generated plugin files. Only the actual current-slide iframe is trusted.
+ * JSON strings keep Reveal's own postMessage listener compatible with file://.
+ */
+(() => {
+  'use strict';
+  const namespace = 'course-chalkboard-sync-v1';
+  const params = new URLSearchParams(location.search);
+  const receiver = params.has('receiver');
+  if (params.has('print-pdf') || (receiver && params.get('postMessageEvents') !== 'true')) return;
+
+  function start() {
+    const deck = window.Reveal;
+    if (!deck || !deck.isReady()) { setTimeout(start, 100); return; }
+    const plugin = deck.getPlugin('RevealChalkboard');
+    if (!plugin) return; // The single-file profile deliberately disables drawing.
+    let speakerWindow = null;
+    let host = null;
+    let applying = false;
+    let capturing = false;
+    let captured = null;
+    let connected = !receiver;
+    let pendingView = null;
+    const allowed = new Set(['draw', 'erase', 'clear', 'selectboard',
+      'showChalkboard', 'closeChalkboard', 'resetSlide', 'init']);
+    const config = deck.getConfig().chalkboard || {};
+    let referenceSize = { width: deck.getConfig().width, height: deck.getConfig().height };
+    function scaleTools() {
+      // The stock plugin scales coordinates but uses fixed pixel brush/eraser
+      // sizes. Use the same slide-coordinate sizes in every window and replay.
+      const scale = Math.min(innerWidth / referenceSize.width, innerHeight / referenceSize.height);
+      plugin.configure({
+        boardmarkerWidth: (config.boardmarkerWidth || config.penWidth || 3) * scale,
+        chalkWidth: (config.chalkWidth || 7) * scale,
+        eraser: { ...config.eraser, radius: (config.eraser?.radius || 20) * scale }
+      });
+    }
+    scaleTools();
+    // Capture runs before the plugin's resize/replay listener.
+    window.addEventListener('resize', scaleTools, true);
+    // Native setup starts with scale=1 until the first resize. Normalize before
+    // any local stroke, even when the browser opens at an unchanged window size.
+    window.dispatchEvent(new Event('resize'));
+
+    if (receiver) {
+      try { host = parent.opener; } catch (_) { return; }
+      if (!host) return;
+    }
+    const clone = value => JSON.parse(JSON.stringify(value));
+    const indices = () => clone(deck.getIndices());
+    const sameSlide = (a, b) => a.h === b.h && (a.v || 0) === (b.v || 0)
+      && (a.f ?? -1) === (b.f ?? -1);
+    function currentWindow() {
+      try {
+        return speakerWindow && !speakerWindow.closed
+          ? speakerWindow.document.querySelector('#current-slide iframe')?.contentWindow : null;
+      } catch (_) { return null; }
+    }
+    function send(target, type, data) {
+      if (target && !target.closed) target.postMessage(JSON.stringify({ namespace, type, data }), '*');
+    }
+    function dispatch(type, content) {
+      const event = new CustomEvent(type);
+      if (type === 'seekplayback') event.timestamp = content;
+      else event.content = content;
+      document.dispatchEvent(event);
+    }
+    function state() {
+      // The plugin supplies its storage and live mode synchronously in reply.
+      capturing = true;
+      const event = new CustomEvent('welcome');
+      event.id = namespace;
+      try { document.dispatchEvent(event); } finally { capturing = false; }
+      if (!captured) throw new Error('Chalkboard welcome event is unavailable');
+      return { ...captured, slide: indices(), reveal: deck.getState() };
+    }
+    function restoreView(view) {
+      dispatch('received', { sender: 'chalkboard-plugin', type: 'course-sync-view',
+        timestamp: view.timestamp, mode: view.mode, board: view.board });
+    }
+    function restore(snapshot) {
+      applying = true;
+      try {
+        referenceSize = snapshot.storage[0];
+        scaleTools();
+        dispatch('received', { ...snapshot, sender: 'chalkboard-plugin', type: 'init' });
+        const here = indices();
+        const duration = Math.max(0, ...snapshot.storage.flatMap(canvas =>
+          canvas.data.filter(item => sameSlide(item.slide, here)).map(item => item.duration)));
+        // Native init schedules a delayed replay with mode=0. Replay now cancels
+        // that timeout, then restore the real mode/board (including an empty board).
+        dispatch('seekplayback', duration + 1);
+        if (sameSlide(snapshot.slide, here)) {
+          restoreView({ ...snapshot, timestamp: duration + 1 });
+          pendingView = null;
+        } else {
+          pendingView = snapshot;
+        }
+      } finally { applying = false; }
+    }
+    function eventRecord(content) {
+      const record = { time: content.timestamp, type: content.type };
+      if (content.mode === 1 || content.type === 'closeChalkboard') record.board = content.board;
+      if (content.type === 'draw') Object.assign(record, { type: 'draw', color: content.color,
+        x1: content.fromX, y1: content.fromY, x2: content.toX, y2: content.toY });
+      if (content.type === 'erase') Object.assign(record, { x: content.x, y: content.y });
+      if (content.type === 'showChalkboard') record.type = 'open';
+      if (content.type === 'closeChalkboard') record.type = 'close';
+      return record;
+    }
+    function applyOperation(operation) {
+      const { slide, page } = operation;
+      const content = { ...operation.content };
+      if (!allowed.has(content.type)) return;
+      if (content.type === 'init') { restore({ ...content, slide }); return; }
+      applying = true;
+      try {
+        const snapshot = state();
+        // welcome exposes the plugin-owned store. For a message that arrives
+        // after navigation, update that message's page without changing slides.
+        // This also avoids the native received handler recording on the wrong page.
+        if (content.type === 'resetSlide') {
+          for (const canvas of snapshot.storage) {
+            for (const item of canvas.data) if (sameSlide(item.slide, slide)) {
+              item.events = []; item.duration = 0;
+            }
+          }
+          if (sameSlide(slide, indices())) dispatch('seekplayback', 0);
+          return;
+        }
+        const id = content.type === 'closeChalkboard' ? 1 : content.mode;
+        const canvas = snapshot.storage[id];
+        let item = canvas.data.find(item => sameSlide(item.slide, slide));
+        if (!item) {
+          item = { slide: clone(slide), page, events: [], duration: 0 };
+          canvas.data.push(item);
+        }
+        // Preserve arrival order when two windows draw almost simultaneously.
+        content.timestamp = Math.max(content.timestamp, item.duration);
+        const record = eventRecord(content);
+        const count = item.events.length;
+        const visible = sameSlide(slide, indices());
+        if (visible) {
+          dispatch('received', content);
+        }
+        // draw/erase/clear are recorded by received on the current page.
+        // Native received does not record open/close/selectboard; retain these
+        // explicitly so replay and reopening preserve every board.
+        if (item.events.length === count) item.events.push(record);
+        item.duration = Math.max(item.duration, content.timestamp + 1);
+        if (!visible) plugin.updateStorage();
+      } finally { applying = false; }
+    }
+
+    document.addEventListener('broadcast', event => {
+      if (event.content?.sender !== 'chalkboard-plugin') return;
+      if (capturing) { captured = event.content; return; }
+      if (event.content.recipient) return; // Do not relay another plugin's welcome reply.
+      if (applying || !connected || !allowed.has(event.content.type)) return;
+      send(receiver ? host : currentWindow(), 'operation', {
+        content: event.content, slide: indices(),
+        page: Number(deck.getCurrentSlide().getAttribute('data-pdf-page-number'))
+      });
+    });
+    window.addEventListener('message', event => {
+      if (typeof event.data !== 'string') return;
+      let message;
+      try { message = JSON.parse(event.data); } catch (_) { return; }
+      if (!message) return;
+      if (!receiver && message.namespace === 'reveal-notes' && message.type === 'connected') {
+        try {
+          // file:// has a null origin: authenticate the actual opener relationship
+          // and iframe WindowProxy instead of trusting a shared origin string.
+          if (event.source.opener === window && event.source.document.querySelector('#current-slide')) {
+            speakerWindow = event.source;
+          }
+        } catch (_) { /* An unrelated window cannot register. */ }
+        return;
+      }
+      if (message.namespace !== namespace) return;
+      if (receiver ? event.source !== host : event.source !== currentWindow()) return;
+      if (!receiver && message.type === 'hello') {
+        send(event.source, 'snapshot', state());
+      } else if (receiver && message.type === 'snapshot') {
+        deck.setState(message.data.reveal);
+        restore(message.data);
+        connected = true;
+        clearInterval(helloTimer);
+      } else if (message.type === 'operation' && connected) {
+        applyOperation(message.data);
+      }
+    });
+    // When a snapshot arrived while native notes navigation was in flight,
+    // apply its view only once the matching page/fragment is actually active.
+    function afterNavigation() {
+      if (pendingView && sameSlide(pendingView.slide, indices())) {
+        const view = pendingView;
+        pendingView = null;
+        restore({ ...state(), mode: view.mode, board: view.board });
+      }
+    }
+    deck.on('slidechanged', afterNavigation);
+    deck.on('fragmentshown', afterNavigation);
+    deck.on('fragmenthidden', afterNavigation);
+    let helloTimer;
+    if (receiver) {
+      const hello = () => send(host, 'hello', null);
+      helloTimer = setInterval(hello, 500);
+      hello();
+      window.addEventListener('pagehide', () => clearInterval(helloTimer), { once: true });
+    }
+  }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
+})();
+</script>

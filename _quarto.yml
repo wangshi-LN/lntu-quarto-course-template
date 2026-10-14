@@ -41,4 +41,4 @@ format:
     html-math-method: mathml
     footer: "授课教师"
     include-in-header: [theme/head.html, theme/fonts.html]
-    include-after-body: [theme/body-header-preview-footer.html, theme/chalkboard-controls.html]
+    include-after-body: [theme/body-header-preview-footer.html, theme/chalkboard-controls.html, theme/chalkboard-sync.html]

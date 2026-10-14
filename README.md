@@ -100,6 +100,16 @@ python serve.py
 
 笔迹与幻灯顺序相关，重排页面后必须复查对应关系。其他电脑需要带上这个JSON。以浏览器实际下载和重载结果为准。
 
+### Speaker View 涂鸦同步（2026-10-14）
+
+直接打开 `course.html` 或 `layouts.html`，按 `S` 打开演讲者窗口。在 Speaker View 的“当前页”区域按 `C` 或点击批注按钮后书写，笔迹、擦除和删除操作会同步到投影主窗口；从主窗口书写也会反向同步。`C` 只控制所在窗口是否接收书写输入，`B` 的黑板开关和黑板切换会同步。“下一页预览”不参与笔迹同步。
+
+主窗口保持打开时，关闭并重新按 `S` 打开演讲者窗口，可恢复已有页面笔迹、黑板笔迹和当前黑板。允许浏览器打开演讲者弹窗。刷新或关闭主窗口前仍需导出涂鸦 JSON；窗口同步不提供跨次打开的自动保存。
+
+实现位于 `theme/chalkboard-sync.html`，由 `_quarto.yml` 引入，生成时会自动进入 HTML；不需要修改 Quarto 安装目录或生成的插件文件，也不需要启动服务器。画笔、橡皮擦和坐标按课件尺寸缩放，适配不同大小的两个窗口。单文件导出仍关闭涂鸦。
+
+当前验证环境为 Quarto 1.10.18、其内置 RevealChalkboard 2.3.3，以及 Chromium 155.0.8059.40 的 `file://` 双窗口。依赖该插件的 `welcome`、`broadcast`、`received`、`seekplayback` 事件协议；更换 Quarto/插件版本后应重跑相关检查。验证记录见 `验证记录.md`；`scripts/test-chalkboard-sync.js` 是 Playwright `browser_run_code_unsafe` 的函数文件，先打开本模板的本地 `course.html`，再以 `filename` 调用。测试会刷新该测试页并关闭同一测试浏览器上下文的其他窗口，应使用专用测试上下文。
+
 ## 导出单文件
 
 ```powershell
